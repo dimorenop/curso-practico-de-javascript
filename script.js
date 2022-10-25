@@ -18,23 +18,36 @@ const botonSuma = document.querySelector("#boton-suma");
 const botonResta = document.querySelector("#boton-resta");
 const botonMultiplicacion = document.querySelector("#boton-multiplicacion");
 const botonDivision = document.querySelector("#boton-division");
-const botonIgual = document.querySelector("#boton-igual");
+const botonResultado = document.querySelector("#boton-resultado");
 const botonPunto = document.querySelector("#boton-punto");
+const botonReset = document.querySelector("#boton-reset");
+
+var result = [];
+var elementos = document.getElementsByTagName("button");
+
 let cacheAfter = 0;
 let cacheBefore = 0;
 let resultado = null;
 let dato = null;
 let operar = false;
+let operaciones = "";
 
 function botonOnClick(dato) {
   //let resultado = Number(input1.value) + Number(input2.value);
 //   console.log(`el dato es ${dato}`);
-  if (operar == false) {
+
+  if(dato == 'AC'){
+    location. reload()
+  }
+  else if (operar == false) {
     operacionesBefore(dato)
   }
   else if (operar == true) {
     operacionesAfter(dato)
-  } 
+  }
+
+  operaciones = operaciones + " " + dato;
+  pOperaciones.innerText = `${operaciones}`
 }
 
 function operacionesBefore(dato) {
@@ -92,7 +105,23 @@ function arrojarResultado() {
     } else {
         console.log("mensaje predeterminado")
     }
-    console.log(resultado)
+
+    // botonSuma.disabled = true;
+    // botonResta.disabled = true;
+    // botonMultiplicacion.disabled = true;
+    // botonDivision.disabled = true;
+    // botonPunto.disabled = true;
+    // botonResultado.disabled = true;
+    for (i = 0; i < elementos.length - 1; i++) {
+          //result.push(elementos[i].innerHTML);
+          elementos[i].style.backgroundColor = "#13254280";
+          elementos[i].style.borderColor = "white";
+          elementos[i].disabled = true;
+      }
+
+    // document.querySelector("button").style.backgroundColor = "#13254280";
+    pResult.innerText = `${resultado.toFixed(2)}`
+    console.log(resultado.toFixed(2))
     reInicializarVariables();
     return resultado;
     //Se re-inicializan las variables para poder volver a ejecutar el programa
